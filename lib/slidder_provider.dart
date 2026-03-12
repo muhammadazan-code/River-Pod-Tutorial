@@ -23,7 +23,7 @@ class SliderScreen extends ConsumerWidget {
           children: [
             Consumer(
               builder: (context, ref, child) {
-                final a = ref.watch(
+                final showpassword = ref.watch(
                   sliderProvider.select((state) => state.showPassword),
                 );
                 if (kDebugMode) {
@@ -31,15 +31,15 @@ class SliderScreen extends ConsumerWidget {
                 }
                 return InkWell(
                   onTap: () {
-                    final stateProvider = ref.watch(sliderProvider.notifier);
+                    final stateProvider = ref.read(sliderProvider.notifier);
                     stateProvider.state = stateProvider.state.copyWith(
-                      showPassword: !a,
+                      showPassword: !showpassword,
                     );
                   },
                   child: Container(
                     height: 100,
                     width: 100,
-                    child: a
+                    child: showpassword
                         ? Icon(Icons.remove_red_eye)
                         : Icon(CupertinoIcons.eye_slash),
                   ),
